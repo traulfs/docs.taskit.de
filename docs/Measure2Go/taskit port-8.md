@@ -190,5 +190,4 @@ Byte 3:
 
 ## 4. Querverweise
 
-- [[Powerpoint/portchar_260514]] – Originale Folien-Dokumentation
 - [[UTF-8 Kodierung]] – Grundlagen der UTF-8-Kodierung
