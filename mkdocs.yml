@@ -1,0 +1,59 @@
+site_name: taskit Dokumentation
+site_url: https://docs.taskit.de
+site_description: Technische Dokumentation der taskit GmbH zu Sensornetzwerken, BLE-Formaten und IO-Modulen
+repo_url: https://github.com/traulfs/docs.taskit.de
+repo_name: traulfs/docs.taskit.de
+
+theme:
+  name: material
+  language: de
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Dunkles Design
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Helles Design
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+
+# Excalidraw-Quelldateien und Numbers-Tabellen nicht mit veröffentlichen
+exclude_docs: |
+  *.excalidraw.md
+  *.numbers
+
+plugins:
+  - search:
+      lang: de
+  - roamlinks
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
