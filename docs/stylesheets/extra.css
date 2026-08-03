@@ -1,0 +1,77 @@
+/* taskit Markenfarbe (#E20074), nur als Akzent verwendet: Links, aktiver Tab, Hover */
+[data-md-color-accent="custom"] {
+  --md-accent-fg-color: #e20074;
+  --md-accent-fg-color--transparent: #e2007414;
+  --md-accent-bg-color: #ffffff;
+  --md-accent-bg-color--light: hsla(0, 0%, 100%, 0.7);
+}
+
+/* Etwas mehr Ruhe und Kontur in der Typografie */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.md-typeset h2 {
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  padding-bottom: 0.3rem;
+}
+
+/* Logo im Header: vertikales taskit-Banner, Originalgröße wie auf taskit.de (.logo{height:105px}) */
+.md-header__button.md-logo {
+  margin: 0.2rem;
+  padding: 0.2rem;
+}
+
+.md-header__button.md-logo img {
+  height: 105px;
+  width: auto;
+}
+
+/* Dünner Markenstreifen unter dem Header, statt vollflächigem Pink */
+.md-header {
+  border-bottom: 3px solid var(--md-accent-fg-color);
+}
+
+/* Weichere Kanten und dezenter Schatten für Codeblöcke, Tabellen, Admonitions */
+.md-typeset pre > code,
+.md-typeset table:not([class]),
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 0.4rem;
+  box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.08);
+}
+
+.md-typeset table:not([class]) th {
+  border-bottom: 2px solid var(--md-accent-fg-color);
+}
+
+/* Aktive Tabs/Links in der Navigation etwas deutlicher hervorheben */
+.md-nav__link--active,
+.md-nav__link:focus,
+.md-nav__link:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* Rechte Inhaltsverzeichnis-Spalte entfernen - nur die linke Navigation bleibt */
+.md-sidebar--secondary {
+  display: none !important;
+}
+
+.md-content__inner {
+  margin-left: 0.8rem !important;
+  margin-right: 0.8rem !important;
+}
+
+/* Sidebar-eigene Logo/Titel-Leiste am Desktop ausblenden - der Header zeigt
+   Logo/Titel bereits, sonst steht "taskit Dokumentation" doppelt (Sidebar-
+   Titel direkt über dem gleichnamigen Startseiten-Link). Mobil (Drawer)
+   bleibt sie erhalten, da dort kein Header mit Logo sichtbar ist. */
+@media screen and (min-width: 76.25em) {
+  .md-nav--primary .md-nav__title[for="__drawer"] {
+    display: none;
+  }
+}
+
