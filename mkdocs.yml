@@ -46,9 +46,23 @@ exclude_docs: |
   *.numbers
 
 plugins:
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: de
+          name: Deutsch
+          build: true
+          default: true
+        - locale: en
+          name: English
+          build: true
   - search:
-      lang: de
-  - roamlinks
+      lang:
+        - de
+        - en
+
+hooks:
+  - hooks/roamlinks_i18n.py
 
 markdown_extensions:
   - admonition
