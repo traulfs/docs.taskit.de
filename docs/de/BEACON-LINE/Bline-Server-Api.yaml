@@ -1,0 +1,1018 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: BeaconLine Server API
+  description: BeaconLine  Server API
+  termsOfService: 'http://taskit.de/Bline-Server/terms'
+  contact:
+    name: taskit GmbH
+    email: info@taskit.de
+    url: 'http://taskit.de'
+  license:
+    name: taskit Bline-Server
+    url: 'http://taskit.de/Bline-Server/licence'
+servers:
+  - url: http://localhost:{port}/{basePath}
+    description: Bline-Server
+    variables:
+      port:
+        default:  "8080"
+      basePath: 
+        default:  bline/v1  
+  - url: /{basePath}
+    description: Bline-Server Default
+    variables:
+      basePath:
+        default: bline/v1
+  - url: http://{host}:{port}/{basePath}
+    description: Bline-Server Custom
+    variables:
+      host:
+        default: 10.1.108.45
+      port:
+        default: '8080'
+      basePath:
+        default: bline/v1
+paths:
+  /files/{anchor}:
+    get:
+      summary: Returns a list of files
+      description: Returns a list of files
+      operationId: getFiles
+      tags:
+        - files
+      parameters:
+        - name: anchor
+          in: path
+          description: name of the Anchor
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: files response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/File'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'  
+    post:
+      summary: Uploads a file
+      description: Uploads a file
+      operationId: uploadFile
+      tags:
+        - files
+      parameters:
+        - name: anchor
+          in: path
+          description: name of the Anchor
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The file to upload
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: File uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'  
+    delete:
+      summary: Deletes a file
+      description: Deletes a file
+      operationId: deleteFile
+      tags:
+        - files
+      parameters:
+        - name: anchor
+          in: path
+          description: name of the Anchor
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: name of the file
+          example: "test.txt"
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: File deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /routers:
+    get:
+      summary: Returns all BLine-Server Routers
+      description: Returns all BLine-Server Routers
+      operationId: getRouters
+      tags:
+        - routers
+      responses:
+        '200':
+          description: routers response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/Router'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /lines:
+    get:
+      summary: Returns all BeaconLines
+      description: Returns all BeaconLines
+      operationId: getLines
+      tags:
+        - lines
+      responses:
+        '200':
+          description: Lines response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/Line'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /line/{name}:
+    get:
+      summary: Returns a BeaconLine by name
+      description: Returns a BeaconLine by name
+      tags:
+        - lines
+      operationId: getLine
+      parameters:
+        - name: name
+          in: path
+          description: name of BeaconLine
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Line response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Line'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Writes a BeaconLine by name
+      description: Writes a BeaconLine by name
+      tags:
+        - lines
+      operationId: putLine
+      requestBody:
+        description: BeaconLine to write
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Line'
+      parameters:
+        - name: name
+          in: path
+          description: name of the BeaconLine
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: BeaconLine response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Line'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes a BeaconLine by name
+      description: Deletes a BeaconLine by name
+      tags:
+        - lines
+      operationId: deleteLine
+      parameters:
+        - name: name
+          in: path
+          description: name of the BeaconLine
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: BeaconLine deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 
+  /anchors:
+    get:
+      summary: Returns all Anchors of a Line
+      description: Returns all Anchors of a Line
+      operationId: getAnchors
+      tags:
+        - anchors
+      responses:
+        '200':
+          description: Anchors response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/Anchor'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /anchor/{name}:
+    get:
+      summary: Returns the full state of a specific Anchors
+      description: Returns the full state of a specific Anchors
+      operationId: getAnchor
+      tags:
+        - anchors
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Anchors response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Anchor'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /anchor/{name}/version:
+    get:
+      summary: Returns the version string of a specific Anchors
+      description: Returns the version string of a specific Anchors
+      operationId: getAnchorVersion
+      tags:
+        - anchors
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Anchor version response
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /anchor/{name}/restart:
+    put:
+      summary: Restarts the specific Anchors
+      description: Restarts the specific Anchors
+      operationId: putAnchorRestart
+      tags:
+        - anchors
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Anchor restart response
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /anchor/{name}/atcmd/{cpu}:
+    put:
+      summary: Puts an At-Command to the specific Anchors
+      description: Puts an At-Command to the specific Anchors
+      operationId: putAnchorAtcmd
+      tags:
+        - anchors
+      requestBody:
+        description: Data to write
+        required: true
+        content:
+          text:
+            schema:
+              type: string
+            example: ATI
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+        - name: cpu
+          in: path
+          description: "which cpu: 0=D21 or 1-HCI"
+          example: 1
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Anchor At-Command response
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'              
+  /anchor/{name}/broadcast:
+    put:
+      summary: Switches the broadcast mode on or off
+      description: Switches the broadcast mode on or off
+      operationId: putAnchorBroadcast
+      tags:
+        - anchors
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+        - name: 'on'
+          in: query
+          description: Broadcast State
+          required: true
+          example: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Anchors response
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /anchor/{name}/scan:
+    put:
+      summary: Switches the scan mode on or off
+      description: Switches the scan mode on or off
+      operationId: putAnchorScan
+      tags:
+        - anchors
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+        - name: 'on'
+          in: query
+          description: Scan State
+          required: true
+          example: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Anchors response
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /anchor/{name}/connect/{mac}:
+    put:
+      summary: Tries to connect the specified Anchor with the specified Node
+      description: Tries to connect the specified Anchor with the specified Node
+      operationId: putAnchorConnect
+      tags:
+        - anchors
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+        - name: mac
+          in: path
+          description: mac of Beacon
+          example: 8C:F6:81:47:21:83
+          required: true
+          schema:
+            type: string
+        - name: random
+          in: query
+          description: Random MAC
+          required: false
+          example: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Anchors response
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  #/anchor/{name}/disconnect/{mac}:
+  /anchor/{name}/disconnect:
+    put:
+      summary: Disconnects the Anchor from the Node
+      description: Disconnects the Anchor from the Node
+      operationId: putAnchorDisconnect
+      tags:
+        - anchors
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+        #- name: mac
+        #  in: path
+        #  description: mac of Beacon
+        #  example: 8C:F6:81:47:21:83
+        #  required: true
+        #  schema:
+        #    type: string
+      responses:
+        '200':
+          description: Anchors response
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /anchor/{name}/discover/{mac}:
+    put:
+      summary: Discover a connected Node with Anchor
+      description: Disconnects the Anchor from the Node
+      operationId: putAnchorDiscover
+      tags:
+        - anchors
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+        - name: mac
+          in: path
+          description: mac of Beacon
+          example: 8C:F6:81:47:21:83
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Anchors response
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'              
+  /anchor/{name}/handle/{mac}/{handle}:
+    get:
+      summary: Reads a BLE handle of a Node over an Anchor
+      description: Reads a BLE handle of a Node over an Anchor
+      tags:
+        - anchors 
+      operationId: getAnchorHandle
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+        - name: mac
+          in: path
+          description: mac of Node
+          example: 8C:F6:81:47:21:83
+          required: true
+          schema:
+            type: string
+        - name: handle
+          in: path
+          description: handle of characteristic
+          example: 3
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Anchor response
+          content:
+            application/json:
+              schema:
+                type: string
+                example:
+                  hex: 'abc123'  
+            text:
+              schema:
+                type: string
+              example: text
+            float:
+              schema:
+                type: number
+                format: float
+              example: 12.4
+            double:
+              schema:
+                type: number
+                format: double
+              example: 12.4
+            int16:
+              schema:
+                type: integer
+                format: int16
+              example: 12    
+            int32:
+              schema:
+                type: integer
+                format: int32
+              example: 12    
+            int64:
+              schema:
+                type: integer
+                format: int64
+              example: 12    
+            hex:
+              schema:
+                type: string
+              example: abc123        
+            boolean:
+              schema:
+                type: boolean
+              example: true        
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Writes a BLE handle of a Node over an Anchor
+      description: Writes a BLE handle of a Node over an Anchor
+      tags:
+        - anchors
+      operationId: putAnchorHandle
+      requestBody:
+        description: Data to write
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              example:
+                hex: 'abc123'  
+          text:
+            schema:
+              type: string
+            example: text
+          float:
+            schema:
+              type: number
+              format: float
+            example: 12.4
+          double:
+            schema:
+              type: number
+              format: double
+            example: 12.4
+          int16:
+            schema:
+              type: integer
+              format: int16
+            example: 12    
+          int32:
+            schema:
+              type: integer
+              format: int32
+            example: 12    
+          int64:
+            schema:
+              type: integer
+              format: int64
+            example: 12    
+          hex:
+            schema:
+              type: string
+            example: abc123        
+          boolean:
+            schema:
+              type: boolean
+            example: true        
+      parameters:
+        - name: name
+          in: path
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+          required: true
+          schema:
+            type: string
+        - name: mac
+          in: path
+          description: mac of Node
+          example: CC:E6:4F:4F:79:F8
+          required: true
+          schema:
+            type: string
+        - name: handle
+          in: path
+          description: handle of characteristic
+          example: 3
+          required: true
+          schema:
+            type: integer
+        - name: response
+          in: query
+          description: with response
+          required: false
+          example: true
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Anchor response
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                type: string
+  /nodes:
+    get:
+      summary: Reads all BLE-Nodes
+      description: Reads all BLE-Nodes
+      operationId: getNodes
+      tags:
+        - nodes
+      responses:
+        '200':
+          description: nodes response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Node'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /node/{mac}:
+    get:
+      summary: Returns a Beacon by mac
+      description: Returns a Beacon by mac
+      tags:
+        - nodes 
+      operationId: getNode
+      parameters:
+        - name: mac
+          in: path
+          description: mac of Beacon
+          example: 8C:F6:81:47:21:83
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Node response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    File:
+      required:
+        - name
+        - size
+        - url
+      properties:
+        name:
+          type: string
+          description: Name of the file
+        size:
+          type: integer
+          format: int64
+          description: Size of the file in bytes
+        url:
+          type: string
+          description: URL for the file
+    Router:
+      required:
+        - name
+        - description
+        - url 
+        - enabled
+      properties:
+        name:
+          type: string
+          default: "r1"
+          example: "router1"
+        description:
+          description: descriotion of BeaconLine Router
+          type: string
+        url:
+          description: URL of BeaconLine Router
+          type: string
+          default: "localhost:50051"
+          example: "localhost:50051"
+        enabled: 
+          type: boolean
+          default: true
+    Line:
+      required:
+        - name
+        - description
+        - url 
+        - anchors
+        - enabled
+        - scan
+        - broadcast
+      properties:
+        name:
+          type: string
+          default: "bl"
+          example: "bline-1"
+        description:
+          description: descriotion of BeaconLine
+          type: string
+        url:
+          description: URL of BeaconLine
+          type: string
+          default: "localhost:3001"
+          example: "localhost:3001"
+        anchors:
+          description: count anchors of BeaconLine
+          type: integer
+          default: 1
+          minimum: 1
+          maximum: 24
+        enabled: 
+          type: boolean
+          default: true
+        scan: 
+          type: boolean
+          default: true
+        broadcast: 
+          type: boolean
+          default: false
+        anchor: 
+          description: anchors of BeaconLine
+          type: array
+          items: 
+            $ref: '#/components/schemas/Anchor'
+    Anchor:
+      required:
+        - name
+        - Description
+        - Url
+        - mac
+        - Fixed
+        - Scanning
+        - Broadcasting
+        - Connected
+        - Location
+        - Angle
+      properties:
+        name:
+          type: string
+          description: Linename + '-' + Anchornumber (in 2 digits)
+          example: line-1-04
+        Description:
+          description: description of anchor
+          type: string
+        Url:
+          description: URL of anchor
+          type: string
+          default: "localhost:3001"
+          example: "localhost:3001"
+        mac:
+          type: string
+          example: 8C:F6:81:47:21:83
+        Version:
+          type: string
+        Location:
+          description: Position of the Anchor. User defined string
+          type: string
+        Angle:
+          description: Magnetic Angle of View from Observer. Magnetic North is 0°
+          type: integer
+        Fixed:
+          description: Fixed Position of the Anchor.
+          type: boolean 
+        Scanning: 
+          description: Scanning State
+          type: boolean
+          default: false 
+        Broadcasting: 
+          description: Broadcasting State
+          type: boolean
+          default: false 
+        Connected: 
+          description: Connection State
+          type: boolean
+          default: false 
+        Streaming: 
+          description: Streaming State
+          type: boolean
+          default: false 
+        NodeMap:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AnchorData'
+    AnchorData:
+      required:
+        - AnchorID
+      properties:
+        AnchorID:
+          description: ID of the Anchor. Linename + '-' + Anchornumber
+          example: line-1-1
+        Timestamp:
+          description: Unix Timestamp in Milliseconds
+          type: integer
+        RSSI:
+          type: integer
+    Node:
+      required:
+        - mac  
+      properties:
+        mac:
+          type: string
+          example: d3:9a:de:eb:21:f7
+        Connectable:
+          type: boolean
+        name:  
+          type: string
+        Data:
+          type: string 
+        LastTime:
+          description: Timestamp in ms from last seen
+          type: integer
+        LastAnchor:
+          type: string  
+        AnchorList:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnchorData'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Error code
+        message:
+          type: string
+          description: Error message
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missign or invalid
+      headers:
+          WWW_Authenticate:
+            schema:
+              type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - BearerAuth: [ ]

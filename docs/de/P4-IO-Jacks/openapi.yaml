@@ -1,0 +1,319 @@
+openapi: 3.0.3
+
+info:
+  title: P4-IO-Jacks API
+  version: 1.0.0
+  description: >
+    HTTP-REST-API des P4-IO-Jacks-Moduls (ESP32-P4). Liest und schreibt die
+    Netzwerkkonfiguration (`network_config_t`), die MQTT-Laufzeitkonfiguration
+    (`mqtt_config_t`) sowie die Konfiguration der IO-Jack-Interfaces
+    (Modus PORT/I2C/UART, UART-Parameter, I2C-Adresse).
+
+
+    **Änderungssemantik**
+
+    - Netzwerkänderungen werden sofort in NVS gespeichert, gelten aber erst nach
+      einem **Neustart** (`reboot_required: true`).
+
+    - IO-Jack-Änderungen sind **live** (`reboot_required: false`) und werden
+      ebenfalls in NVS persistiert (Wiederherstellung beim Boot).
+
+    - Schreibvorgänge sind **atomar**: der gesamte Request wird validiert, bevor
+      etwas angewendet wird.
+
+servers:
+  - url: http://{host}
+    variables:
+      host:
+        default: 192.168.1.50
+        description: IP-Adresse oder Hostname des Moduls
+
+tags:
+  - name: network
+    description: Netzwerkkonfiguration (WiFi, Ethernet, Hostname)
+  - name: iojacks
+    description: IO-Jack-Interface-Konfiguration (PORT / I2C / UART)
+  - name: mqtt
+    description: MQTT-Laufzeitkonfiguration (Broker-URI, Authentifizierung)
+  - name: system
+    description: Systemsteuerung (Neustart)
+
+paths:
+  /api/network:
+    get:
+      tags: [network]
+      summary: Netzwerkkonfiguration lesen
+      responses:
+        '200':
+          description: Alle Netzwerkfelder
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NetworkConfig' }
+    put:
+      tags: [network]
+      summary: Netzwerkkonfiguration schreiben (Teilmenge)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NetworkConfig' }
+      responses:
+        '200':
+          description: Ergebnis
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WriteResult' }
+        '400':
+          description: Validierungsfehler
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    post:
+      tags: [network]
+      summary: Alias für PUT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NetworkConfig' }
+      responses:
+        '200':
+          description: Ergebnis
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WriteResult' }
+
+  /api/iojacks:
+    get:
+      tags: [iojacks]
+      summary: IO-Jack-Konfiguration lesen
+      description: >-
+        `mode`/`mode_name` geben den AKTUELL aktiven Modus zurück. Dieser kann
+        sich zur Laufzeit ändern: Eingehende Transport-Daten auf einem
+        Datentopic (`.../uart/w`, `.../i2c/w`, `.../port/w`) schalten den Jack
+        automatisch in den passenden Modus, bevor sie geschrieben werden
+        („zuletzt genutzter Interface-Zugriff bestimmt den Modus"). UART-Parameter
+        und I2C-Adresse bleiben über solche Moduswechsel hinweg erhalten.
+      parameters:
+        - in: query
+          name: jack
+          required: false
+          schema: { type: integer, minimum: 0 }
+          description: Wenn gesetzt, wird nur dieser Jack zurückgegeben.
+      responses:
+        '200':
+          description: Alle Jacks (oder einzelner Jack bei ?jack=)
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      jacks:
+                        type: array
+                        items: { $ref: '#/components/schemas/IoJack' }
+                  - $ref: '#/components/schemas/IoJack'
+        '404':
+          description: Unbekannter Jack
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    put:
+      tags: [iojacks]
+      summary: IO-Jack konfigurieren (Teilmenge der Felder)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IoJackUpdate' }
+      responses:
+        '200':
+          description: Ergebnis
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IoJackWriteResult' }
+        '400':
+          description: Validierungsfehler
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    post:
+      tags: [iojacks]
+      summary: Alias für PUT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IoJackUpdate' }
+      responses:
+        '200':
+          description: Ergebnis
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IoJackWriteResult' }
+
+  /api/mqtt:
+    get:
+      tags: [mqtt]
+      summary: MQTT-Konfiguration lesen
+      description: >
+        Liefert die MQTT-Laufzeitkonfiguration. Das Passwort wird nie im
+        Klartext ausgeliefert; stattdessen zeigt `password_set` an, ob eines
+        gesetzt ist.
+      responses:
+        '200':
+          description: Alle MQTT-Felder
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MqttConfigRead' }
+    put:
+      tags: [mqtt]
+      summary: MQTT-Konfiguration schreiben (Teilmenge)
+      description: >
+        Beliebige Teilmenge schreibbarer Felder. `username` leer = ohne
+        Authentifizierung; `password` wird nur ausgewertet, wenn `username`
+        gesetzt ist. Änderungen werden sofort in NVS gespeichert, gelten aber
+        erst nach einem Neustart (`reboot_required: true`).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MqttConfigWrite' }
+      responses:
+        '200':
+          description: Ergebnis
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WriteResult' }
+        '400':
+          description: Validierungsfehler
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    post:
+      tags: [mqtt]
+      summary: Alias für PUT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MqttConfigWrite' }
+      responses:
+        '200':
+          description: Ergebnis
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WriteResult' }
+
+  /api/reboot:
+    post:
+      tags: [system]
+      summary: Modul neustarten
+      responses:
+        '200':
+          description: Neustart eingeleitet (Antwort vor dem Reset gesendet)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Ok' }
+
+components:
+  schemas:
+    NetworkConfig:
+      type: object
+      properties:
+        hostname:      { type: string, maxLength: 31 }
+        ap_password:   { type: string, maxLength: 63 }
+        wifi_enabled:  { type: boolean }
+        wifi_ssid:     { type: string, maxLength: 31 }
+        wifi_password: { type: string, maxLength: 63 }
+        wifi_ip_mode:  { type: integer, enum: [0, 1], description: '0=DHCP, 1=statisch' }
+        wifi_ip:       { type: string }
+        wifi_netmask:  { type: string }
+        wifi_gateway:  { type: string }
+        wifi_dns:      { type: string }
+        eth_enabled:   { type: boolean }
+        eth_ip_mode:   { type: integer, enum: [0, 1] }
+        eth_ip:        { type: string }
+        eth_netmask:   { type: string }
+        eth_gateway:   { type: string }
+        eth_dns:       { type: string }
+
+    MqttConfigRead:
+      type: object
+      properties:
+        enabled:      { type: boolean, description: MQTT-Client beim Boot starten }
+        uri:          { type: string, maxLength: 127, description: 'Broker-URI, z. B. mqtt://host:1883' }
+        username:     { type: string, maxLength: 63, description: leer = ohne Authentifizierung }
+        password_set: { type: boolean, description: true, wenn ein Passwort hinterlegt ist (Klartext wird nie geliefert) }
+
+    MqttConfigWrite:
+      type: object
+      description: >
+        Teilmenge der schreibbaren Felder. `username` leer = ohne
+        Authentifizierung; `password` wird nur ausgewertet, wenn `username`
+        gesetzt ist.
+      properties:
+        enabled:  { type: boolean }
+        uri:      { type: string, maxLength: 127, description: 'leer oder mit Schema mqtt://, mqtts://, ws://, wss://' }
+        username: { type: string, maxLength: 63 }
+        password: { type: string, maxLength: 63 }
+
+    IoJack:
+      type: object
+      properties:
+        jack:           { type: integer, description: Jack-Index (0-basiert) }
+        mode:           { type: integer, enum: [0,1,2,3,4,5], description: '0=unset,1=port,2=i2c,3=uart,4=spi,5=adc' }
+        mode_name:      { type: string, enum: [unset, port, i2c, uart, spi, adc] }
+        has_adc:        { type: boolean, description: nur IO-Jack 0 }
+        pads:
+          type: array
+          items: { type: integer }
+          description: GPIO-Nummern der 4 Pads (-1 = nicht belegt)
+        uart_baud:      { type: integer }
+        uart_data_bits: { type: integer, enum: [7, 8, 9] }
+        uart_parity:    { type: integer, enum: [0, 1, 2], description: '0=keine,1=gerade,2=ungerade' }
+        uart_stop_bits: { type: integer, enum: [1, 2] }
+        uart_rs485:     { type: boolean }
+        i2c_addr:       { type: integer, minimum: 0, maximum: 127 }
+
+    IoJackUpdate:
+      type: object
+      required: [jack]
+      description: >
+        Teilmenge der schreibbaren Felder. UART-Felder implizieren den
+        UART-Modus. `mode` hat Vorrang, wenn zusätzlich gesetzt.
+      properties:
+        jack:           { type: integer, minimum: 0 }
+        mode:           { type: integer, enum: [0,1,2,3,4,5] }
+        uart_baud:      { type: integer, enum: [300,600,1200,2400,4800,9600,19200,38400,115200,230400,500000,1000000,3000000,5000000] }
+        uart_data_bits: { type: integer, enum: [7, 8, 9] }
+        uart_parity:    { type: integer, enum: [0, 1, 2] }
+        uart_stop_bits: { type: integer, enum: [1, 2] }
+        uart_rs485:     { type: boolean }
+        i2c_addr:       { type: integer, minimum: 0, maximum: 127 }
+
+    WriteResult:
+      type: object
+      properties:
+        ok:              { type: boolean }
+        changed:         { type: integer }
+        reboot_required: { type: boolean }
+
+    IoJackWriteResult:
+      type: object
+      properties:
+        ok:              { type: boolean }
+        jack:            { type: integer }
+        changed:         { type: integer }
+        reboot_required: { type: boolean, description: bei IO-Jacks immer false }
+
+    Ok:
+      type: object
+      properties:
+        ok: { type: boolean }
+
+    Error:
+      type: object
+      properties:
+        ok:    { type: boolean, example: false }
+        error: { type: string }

@@ -60,6 +60,9 @@ plugins:
       lang:
         - de
         - en
+  - swagger-ui-tag:
+      tryItOutEnabled: true
+      docExpansion: list
 
 hooks:
   - hooks/roamlinks_i18n.py

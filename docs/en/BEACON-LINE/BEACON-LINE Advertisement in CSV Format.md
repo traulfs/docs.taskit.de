@@ -125,3 +125,4 @@ def parse_line(line: str) -> dict:
 - [[BLE/BcastPacket-Tabelle 1.csv]] — Original table
 - [[BeaconLine Scanning 2026-05-22 13.33.13.excalidraw]] — Data path anchor → server → app
 - [[SenML Units]] — Meaning of the unit IDs
+- [[API]] — BeaconLine Server HTTP REST API

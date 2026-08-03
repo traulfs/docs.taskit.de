@@ -59,3 +59,4 @@ Die vier ADC-Kanäle (an IO-Jack 0) werden über die Ext-3-Befehle angesprochen:
 
 - Modi: [[PORT Mode]] · [[UART Mode]] · [[I2C Read & Write]]
 - Transport: [[MQTT & NATS]]
+- Konfiguration per HTTP: [[API]]
