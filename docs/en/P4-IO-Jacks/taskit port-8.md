@@ -114,72 +114,72 @@ Byte 3:
 
 ## 3. Commands
 
-| Code | Name | Data | Usable in |
-|:---:|---|---|---|
-| **0** | Read/Write Value | PAD Data | 4 / 8 / 16 bit |
-| **1** | Read-Command | Read frequencies | 4 / 8 / 16 bit |
-| **2** | Set Output | PAD Mask | 4 / 8 / 16 bit |
-| **3** | Clear Output | PAD Mask | 4 / 8 / 16 bit |
-| **4** | Toggle Output | PAD Mask | 4 / 8 / 16 bit |
-| **5** | Notification | PAD no. + level | 4 / 8 / 16 bit |
-| **6** | I2C Read/Write | 8-bit mode | 4 / 8 / 16 bit |
-| **7** | Return Code | Error / code | 4 / 8 / 16 bit |
-| **8** | Set Direction | PAD Mask | 16-bit only |
-| **9** | Clear Direction | PAD Mask | 16-bit only |
-| **10** | Set PullEnable | PAD Mask | 16-bit only |
-| **11** | Clear PullEnable | PAD Mask | 16-bit only |
-| **12** | Set Notification | PAD Mask | 16-bit only |
-| **13** | Clear Notification | PAD Mask | 16-bit only |
-| **14** | Pull Direction | 0/1 per PAD | 16-bit only |
-| **15** | Delay | Delay in ms | 16-bit only |
-| **16** | Set LED | LED Mask | 16-bit only |
-| **17** | Clear LED | LED Mask | 16-bit only |
-| **18** | Toggle LED | LED Mask | 16-bit only |
-| **19** | — reserved — | – | 16-bit only |
-| **20** | — reserved — | – | 16-bit only |
-| **21** | — reserved — | – | 16-bit only |
-| **22** | — reserved — | – | 16-bit only |
-| **23** | — reserved — | – | 16-bit only |
-| **24** | — reserved — | – | 16-bit only |
-| **25** | Config UART | see [[UART Mode]] | 16-bit only |
-| **26** | Config SPI | Configuration word | 16-bit only |
-| **27** | Config I2C | Configuration word | 16-bit only |
-| **28** | Config Port | Configuration word | 16-bit only |
-| **29** | Config ADC | Configuration word | 16-bit only |
-| **30** | Config DAC | Configuration word | 16-bit only |
-| **31** | — reserved — | – | 16-bit only |
-| **32** | — reserved — | – | 16-bit only |
-| **33** | — reserved — | – | 16-bit only |
-| **34** | — reserved — | – | 16-bit only |
-| **35** | — reserved — | – | 16-bit only |
-| **36** | — reserved — | – | 16-bit only |
-| **37** | — reserved — | – | 16-bit only |
-| **38** | — reserved — | – | 16-bit only |
-| **39** | — reserved — | – | 16-bit only |
-| **40** | — reserved — | – | 16-bit only |
-| **41** | — reserved — | – | 16-bit only |
-| **42** | — reserved — | – | 16-bit only |
-| **43** | — reserved — | – | 16-bit only |
-| **44** | — reserved — | – | 16-bit only |
-| **45** | — reserved — | – | 16-bit only |
-| **46** | — reserved — | – | 16-bit only |
-| **47** | — reserved — | – | 16-bit only |
-| **48** | — reserved — | – | 16-bit only |
-| **49** | — reserved — | – | 16-bit only |
-| **50** | — reserved — | – | 16-bit only |
-| **51** | — reserved — | – | 16-bit only |
-| **52** | — reserved — | – | 16-bit only |
-| **53** | — reserved — | – | 16-bit only |
-| **54** | — reserved — | – | 16-bit only |
-| **55** | — reserved — | – | 16-bit only |
-| **56** | — reserved — | – | 16-bit only |
-| **57** | — reserved — | – | 16-bit only |
-| **58** | — reserved — | – | 16-bit only |
-| **59** | — reserved — | – | 16-bit only |
-| **60** | — reserved — | – | 16-bit only |
-| **61** | — reserved — | – | 16-bit only |
-| **62** | — reserved — | – | 16-bit only |
-| **63** | — reserved — | – | 16-bit only |
+| Code | Name | Data | Description | Usable in |
+|:---:|---|---|---|---|
+| **0** | Read/Write Value | PAD Data | | 4 / 8 / 16 bit |
+| **1** | Read-Command | Read frequencies | | 4 / 8 / 16 bit |
+| **2** | Set Output | PAD Mask | | 4 / 8 / 16 bit |
+| **3** | Clear Output | PAD Mask | | 4 / 8 / 16 bit |
+| **4** | Toggle Output | PAD Mask | | 4 / 8 / 16 bit |
+| **5** | Notification | PAD no. + level | | 4 / 8 / 16 bit |
+| **6** | I2C Read/Write | 8-bit mode | | 4 / 8 / 16 bit |
+| **7** | Return Code | Error / code | | 4 / 8 / 16 bit |
+| **8** | Set Direction | PAD Mask | | 16-bit only |
+| **9** | Clear Direction | PAD Mask | | 16-bit only |
+| **10** | Set PullEnable | PAD Mask | | 16-bit only |
+| **11** | Clear PullEnable | PAD Mask | | 16-bit only |
+| **12** | Set Notification | PAD Mask | | 16-bit only |
+| **13** | Clear Notification | PAD Mask | | 16-bit only |
+| **14** | Pull Direction | 0/1 per PAD | | 16-bit only |
+| **15** | Delay | Delay in ms | | 16-bit only |
+| **16** | Set LED | LED Mask | | 16-bit only |
+| **17** | Clear LED | LED Mask | | 16-bit only |
+| **18** | Toggle LED | LED Mask | | 16-bit only |
+| **19** | Config Read | – | | 16-bit only |
+| **20** | Config Write | – | | 16-bit only |
+| **21** | — reserved — | – | | 16-bit only |
+| **22** | — reserved — | – | | 16-bit only |
+| **23** | — reserved — | – | | 16-bit only |
+| **24** | — reserved — | – | | 16-bit only |
+| **25** | Config UART | see [[UART Mode]] | | 16-bit only |
+| **26** | Config SPI | Configuration word | | 16-bit only |
+| **27** | Config I2C | Configuration word | | 16-bit only |
+| **28** | Config Port | Configuration word | | 16-bit only |
+| **29** | Config ADC | Configuration word | | 16-bit only |
+| **30** | Config DAC | Configuration word | | 16-bit only |
+| **31** | — reserved — | – | | 16-bit only |
+| **32** | — reserved — | – | | 16-bit only |
+| **33** | — reserved — | – | | 16-bit only |
+| **34** | — reserved — | – | | 16-bit only |
+| **35** | — reserved — | – | | 16-bit only |
+| **36** | — reserved — | – | | 16-bit only |
+| **37** | — reserved — | – | | 16-bit only |
+| **38** | — reserved — | – | | 16-bit only |
+| **39** | — reserved — | – | | 16-bit only |
+| **40** | — reserved — | – | | 16-bit only |
+| **41** | — reserved — | – | | 16-bit only |
+| **42** | — reserved — | – | | 16-bit only |
+| **43** | — reserved — | – | | 16-bit only |
+| **44** | — reserved — | – | | 16-bit only |
+| **45** | — reserved — | – | | 16-bit only |
+| **46** | — reserved — | – | | 16-bit only |
+| **47** | — reserved — | – | | 16-bit only |
+| **48** | — reserved — | – | | 16-bit only |
+| **49** | — reserved — | – | | 16-bit only |
+| **50** | — reserved — | – | | 16-bit only |
+| **51** | — reserved — | – | | 16-bit only |
+| **52** | — reserved — | – | | 16-bit only |
+| **53** | — reserved — | – | | 16-bit only |
+| **54** | — reserved — | – | | 16-bit only |
+| **55** | — reserved — | – | | 16-bit only |
+| **56** | — reserved — | – | | 16-bit only |
+| **57** | — reserved — | – | | 16-bit only |
+| **58** | — reserved — | – | | 16-bit only |
+| **59** | — reserved — | – | | 16-bit only |
+| **60** | — reserved — | – | | 16-bit only |
+| **61** | — reserved — | – | | 16-bit only |
+| **62** | — reserved — | – | | 16-bit only |
+| **63** | — reserved — | – | | 16-bit only |
 
 - **PAD Mask**: bitfield, each set bit addresses one PAD (width = data width of the frame: 4 / 8 / 16 bit).
 - Codes **0–7** fit in 3 bits and are therefore usable in **all three** frame sizes.
