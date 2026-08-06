@@ -114,18 +114,18 @@ Byte 3:
 
 ## 3. Commands
 
-| Code | Name | Data | Description | Usable in |
+| Code | Name | Data | Description | Datasize |
 |:---:|---|---|---|---|
-| **0** | Read/Write Value | PAD Data | | 4 / 8 / 16 bit |
-| **1** | Read-Command | Read frequencies | | 4 / 8 / 16 bit |
-| **2** | Set Output | PAD Mask | | 4 / 8 / 16 bit |
-| **3** | Clear Output | PAD Mask | | 4 / 8 / 16 bit |
-| **4** | Toggle Output | PAD Mask | | 4 / 8 / 16 bit |
-| **5** | Notification | PAD no. + level | | 4 / 8 / 16 bit |
-| **6** | I2C Read/Write | 8-bit mode | | 4 / 8 / 16 bit |
-| **7** | Return Code | Error / code | | 4 / 8 / 16 bit |
-| **8** | Set Direction | PAD Mask | | 16-bit only |
-| **9** | Clear Direction | PAD Mask | | 16-bit only |
+| **0**  | Write Value | PAD Data | | 4 / 8 / 16 bit |
+| **1**  | Read-Command | Read frequencies | | 4 / 8 / 16 bit |
+| **2**  | Set Output | PAD Mask | | 4 / 8 / 16 bit |
+| **3**  | Clear Output | PAD Mask | | 4 / 8 / 16 bit |
+| **4**  | Toggle Output | PAD Mask | | 4 / 8 / 16 bit |
+| **5**  | Notification | PAD no. + level | | 4 / 8 / 16 bit |
+| **6**  | I2C Read/Write | 8-bit mode | | 4 / 8 / 16 bit |
+| **7**  | Return Code | Error / code | | 4 / 8 / 16 bit |
+| **8**  | Set Direction | PAD Mask | | 16-bit only |
+| **9**  | Clear Direction | PAD Mask | | 16-bit only |
 | **10** | Set PullEnable | PAD Mask | | 16-bit only |
 | **11** | Clear PullEnable | PAD Mask | | 16-bit only |
 | **12** | Set Notification | PAD Mask | | 16-bit only |
@@ -141,18 +141,18 @@ Byte 3:
 | **22** | — reserved — | – | | 16-bit only |
 | **23** | — reserved — | – | | 16-bit only |
 | **24** | — reserved — | – | | 16-bit only |
-| **25** | Config UART | see [[UART Mode]] | | 16-bit only |
-| **26** | Config SPI | Configuration word | | 16-bit only |
-| **27** | Config I2C | Configuration word | | 16-bit only |
-| **28** | Config Port | Configuration word | | 16-bit only |
-| **29** | Config ADC | Configuration word | | 16-bit only |
-| **30** | Config DAC | Configuration word | | 16-bit only |
+| **25** | — reserved — | – | | 16-bit only |
+| **26** | — reserved — | – | | 16-bit only |
+| **27** | — reserved — | – | | 16-bit only |
+| **28** | — reserved — | – | | 16-bit only |
+| **29** | — reserved — | – | | 16-bit only |
+| **30** | — reserved — | – | | 16-bit only |
 | **31** | — reserved — | – | | 16-bit only |
-| **32** | — reserved — | – | | 16-bit only |
-| **33** | — reserved — | – | | 16-bit only |
-| **34** | — reserved — | – | | 16-bit only |
-| **35** | — reserved — | – | | 16-bit only |
-| **36** | — reserved — | – | | 16-bit only |
+| **32** | Reset Hardware  | – |                    | 16-bit only |
+| **33** | Read HW Version | – | for example "3.01" | 2 x 16-bit |
+| **34** | Read SW Version | – | for example "3.01" | 2 x 16-bit |
+| **35** | Read MAC  | - |  | 3 x 16-bit |
+| **36** | Read Name | - |  | n x 16-bit |
 | **37** | — reserved — | – | | 16-bit only |
 | **38** | — reserved — | – | | 16-bit only |
 | **39** | — reserved — | – | | 16-bit only |

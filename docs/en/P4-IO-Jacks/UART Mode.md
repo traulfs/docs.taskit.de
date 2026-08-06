@@ -88,7 +88,14 @@ The interface is configured with five parameters before data transfer. Short for
 | RS485 | Constant |
 |---|---|
 | off | *(default)* |
-| on | `UartRS485` |
+| on  | `UartRS485` |
+
+**Uart Rx**
+
+| RS485 | Constant |
+|---|---|
+| on  | *(default)* |
+| off | `Uart Receive off` |
 
 ---
 
@@ -98,11 +105,12 @@ The configuration is transmitted via `cfg` with the **Config UART** command (cod
 
 | Bits | Field | Values |
 |:--:|---|---|
-| **15** | RS485 | off `0x0000` · on `0x8000` |
-| **12–14** | Data bits | 8 `0x0000` · 9 `0x1000` · 7 `0x2000` |
-| **10–11** | Parity | none `0x0000` · even `0x0400` · odd `0x0800` |
-| **8–9** | Stop bits | 1 `0x0000` · 1.5 `0x0100` · 2 `0x0200` |
-| **0–7** | Baud rate | code from the table above |
+| **15**    | Uart RX   | off `0x8000` · on `0x0000` |
+| **14**    | RS485     | off `0x0000` · on `0x4000` |
+| **12–13** | Data bits | 8 `0x0000` · 9 `0x1000` · 7 `0x2000` |
+| **10–11** | Parity    | none `0x0000` · even `0x0400` · odd `0x0c00` |
+| **7–8**   | Stop bits | 1 `0x0000` · 1.5 `0x0100` · 2 `0x0200` |
+| **0–7**   | Baud rate | code from the table above |
 
 **Examples:**
 

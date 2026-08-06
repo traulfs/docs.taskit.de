@@ -51,7 +51,6 @@ What is carried in the byte stream depends on the interface – **not** every in
 | Interface | Stream content |
 |---|---|
 | `port` | **Port-8 encoded** – 4-bit read/write ([[PORT Mode]]) |
-| `cfg` | Configuration of the jack (e.g. mode switching, UART settings) |
 | `uart` | raw UART payload data (bytes, **not** Port-8) → [[UART Mode]] |
 | `i2c` | length-prefixed I²C protocol (**not** Port-8) → [[I2C Read & Write]] |
 | `spi` | SPI data stream |
