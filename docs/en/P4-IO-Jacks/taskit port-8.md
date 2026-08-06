@@ -135,17 +135,17 @@ Byte 3:
 | **16** | Set LED | LED Mask | | 16-bit only |
 | **17** | Clear LED | LED Mask | | 16-bit only |
 | **18** | Toggle LED | LED Mask | | 16-bit only |
-| **19** | Config Read | – | | 16-bit only |
-| **20** | Config Write | – | | 16-bit only |
-| **21** | — reserved — | – | | 16-bit only |
-| **22** | — reserved — | – | | 16-bit only |
-| **23** | — reserved — | – | | 16-bit only |
-| **24** | — reserved — | – | | 16-bit only |
-| **25** | — reserved — | – | | 16-bit only |
-| **26** | — reserved — | – | | 16-bit only |
-| **27** | — reserved — | – | | 16-bit only |
-| **28** | — reserved — | – | | 16-bit only |
-| **29** | — reserved — | – | | 16-bit only |
+| **19** | Read  | – | | 16-bit only |
+| **20** | UART Config Write | – | | 16-bit only |
+| **21** | UART Config Read  | – | | 16-bit only |
+| **22** | I2C  Config Write | – | | 16-bit only |
+| **23** | I2C  Config Read  | – | | 16-bit only |
+| **24** | SPI  Config Write | – | TBD | 16-bit only |
+| **25** | SPI  Config Read  | – | TBD | 16-bit only |
+| **26** | ADC  Config Write | – | TBD | 16-bit only |
+| **27** | ADC  Config Read  | – | TBD | 16-bit only |
+| **28** | DAC  Config Write | – | TBD | 16-bit only |
+| **29** | DAC  Config Read  | – | TBD | 16-bit only |
 | **30** | — reserved — | – | | 16-bit only |
 | **31** | — reserved — | – | | 16-bit only |
 | **32** | Reset Hardware  | – |                    | 16-bit only |

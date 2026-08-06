@@ -40,7 +40,6 @@ MQTT:  gpio_abcdef123456/0/uart/r
 | `uart` | serial payload data → [[UART Mode]] |
 | `spi` | SPI data stream |
 | `adc` | Analog input (**IO-Jack 0 only**, ADC0–ADC3) |
-| `cfg` | **Configuration** of the respective jack (Port-8 encoded) |
 
 ---
 

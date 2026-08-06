@@ -6,8 +6,9 @@ info:
   description: >
     HTTP REST API of the P4-IO-Jacks module (ESP32-P4). Reads and writes the
     network configuration (`network_config_t`), the MQTT runtime
-    configuration (`mqtt_config_t`), and the configuration of the IO jack
-    interfaces (mode PORT/I2C/UART, UART parameters, I2C address).
+    configuration (`mqtt_config_t`), the NATS runtime configuration
+    (`nats_config_t`), and the configuration of the IO jack interfaces (mode
+    PORT/I2C/UART, UART parameters, I2C address).
 
 
     **Change semantics**
@@ -35,6 +36,8 @@ tags:
     description: IO jack interface configuration (PORT / I2C / UART)
   - name: mqtt
     description: MQTT runtime configuration (broker URI, authentication)
+  - name: nats
+    description: NATS runtime configuration (server URI, authentication)
   - name: system
     description: System control (reboot)
 
@@ -83,75 +86,6 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/WriteResult' }
 
-  /api/iojacks:
-    get:
-      tags: [iojacks]
-      summary: Read IO jack configuration
-      description: >-
-        `mode`/`mode_name` return the CURRENTLY active mode. This can change
-        at runtime: incoming transport data on a data topic (`.../uart/w`,
-        `.../i2c/w`, `.../port/w`) automatically switches the jack to the
-        matching mode before it is written ("the most recently used
-        interface access determines the mode"). UART parameters and the I2C
-        address are retained across such mode switches.
-      parameters:
-        - in: query
-          name: jack
-          required: false
-          schema: { type: integer, minimum: 0 }
-          description: If set, only this jack is returned.
-      responses:
-        '200':
-          description: All jacks (or a single jack when ?jack= is set)
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - type: object
-                    properties:
-                      jacks:
-                        type: array
-                        items: { $ref: '#/components/schemas/IoJack' }
-                  - $ref: '#/components/schemas/IoJack'
-        '404':
-          description: Unknown jack
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/Error' }
-    put:
-      tags: [iojacks]
-      summary: Configure IO jack (subset of fields)
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: '#/components/schemas/IoJackUpdate' }
-      responses:
-        '200':
-          description: Result
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/IoJackWriteResult' }
-        '400':
-          description: Validation error
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/Error' }
-    post:
-      tags: [iojacks]
-      summary: Alias for PUT
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: '#/components/schemas/IoJackUpdate' }
-      responses:
-        '200':
-          description: Result
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/IoJackWriteResult' }
-
   /api/mqtt:
     get:
       tags: [mqtt]
@@ -198,6 +132,59 @@ paths:
         content:
           application/json:
             schema: { $ref: '#/components/schemas/MqttConfigWrite' }
+      responses:
+        '200':
+          description: Result
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WriteResult' }
+
+  /api/nats:
+    get:
+      tags: [nats]
+      summary: Read NATS configuration
+      description: >
+        Returns the NATS runtime configuration. The password is never
+        returned in plain text; instead, `password_set` indicates whether one
+        is stored.
+      responses:
+        '200':
+          description: All NATS fields
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NatsConfigRead' }
+    put:
+      tags: [nats]
+      summary: Write NATS configuration (subset)
+      description: >
+        Any subset of writable fields. `username` empty = no authentication;
+        `password` is only evaluated if `username` is set. Changes are saved
+        to NVS immediately, but only take effect after a reboot
+        (`reboot_required: true`).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NatsConfigWrite' }
+      responses:
+        '200':
+          description: Result
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WriteResult' }
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    post:
+      tags: [nats]
+      summary: Alias for PUT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NatsConfigWrite' }
       responses:
         '200':
           description: Result
@@ -257,54 +244,24 @@ components:
         username: { type: string, maxLength: 63 }
         password: { type: string, maxLength: 63 }
 
-    IoJack:
+    NatsConfigRead:
       type: object
       properties:
-        jack:           { type: integer, description: Jack index (0-based) }
-        mode:           { type: integer, enum: [0,1,2,3,4,5], description: '0=unset,1=port,2=i2c,3=uart,4=spi,5=adc' }
-        mode_name:      { type: string, enum: [unset, port, i2c, uart, spi, adc] }
-        has_adc:        { type: boolean, description: IO-Jack 0 only }
-        pads:
-          type: array
-          items: { type: integer }
-          description: GPIO numbers of the 4 pads (-1 = unassigned)
-        uart_baud:      { type: integer }
-        uart_data_bits: { type: integer, enum: [7, 8, 9] }
-        uart_parity:    { type: integer, enum: [0, 1, 2], description: '0=none,1=even,2=odd' }
-        uart_stop_bits: { type: integer, enum: [1, 2] }
-        uart_rs485:     { type: boolean }
-        i2c_addr:       { type: integer, minimum: 0, maximum: 127 }
+        enabled:      { type: boolean, description: Start NATS client on boot }
+        uri:          { type: string, maxLength: 127, description: 'Server URI, e.g. nats://host:4222' }
+        username:     { type: string, maxLength: 63, description: empty = no authentication }
+        password_set: { type: boolean, description: true if a password is stored (plain text is never returned) }
 
-    IoJackUpdate:
+    NatsConfigWrite:
       type: object
-      required: [jack]
       description: >
-        Subset of writable fields. UART fields imply UART mode. `mode` takes
-        precedence if also set.
+        Subset of writable fields. `username` empty = no authentication;
+        `password` is only evaluated if `username` is set.
       properties:
-        jack:           { type: integer, minimum: 0 }
-        mode:           { type: integer, enum: [0,1,2,3,4,5] }
-        uart_baud:      { type: integer, enum: [300,600,1200,2400,4800,9600,19200,38400,115200,230400,500000,1000000,3000000,5000000] }
-        uart_data_bits: { type: integer, enum: [7, 8, 9] }
-        uart_parity:    { type: integer, enum: [0, 1, 2] }
-        uart_stop_bits: { type: integer, enum: [1, 2] }
-        uart_rs485:     { type: boolean }
-        i2c_addr:       { type: integer, minimum: 0, maximum: 127 }
-
-    WriteResult:
-      type: object
-      properties:
-        ok:              { type: boolean }
-        changed:         { type: integer }
-        reboot_required: { type: boolean }
-
-    IoJackWriteResult:
-      type: object
-      properties:
-        ok:              { type: boolean }
-        jack:            { type: integer }
-        changed:         { type: integer }
-        reboot_required: { type: boolean, description: always false for IO jacks }
+        enabled:  { type: boolean }
+        uri:      { type: string, maxLength: 127, description: 'empty, or with scheme nats://, tls://' }
+        username: { type: string, maxLength: 63 }
+        password: { type: string, maxLength: 63 }
 
     Ok:
       type: object

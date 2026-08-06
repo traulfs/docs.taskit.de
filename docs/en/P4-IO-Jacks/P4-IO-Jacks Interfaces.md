@@ -17,12 +17,14 @@ status: description
 
 The P4 module provides **four IO jacks** (physical connectors): **IO-Jack 0 – IO-Jack 3**. Each jack supports four operating modes — the **most recently used interface access** determines the active mode:
 
-| Mode     | Purpose                                                       |
-| -------- | ------------------------------------------------------------ |
-| **PORT** | Digital I/O with 4 bit (Pin0–Pin3)                            |
-| **I²C**  | I²C master, read/write via tunneled byte streams              |
-| **UART** | Serial interface, configurable (baud rate, parity, …)         |
-| **SPI**  | SPI interface (configuration TBD)                              |
+| Mode     | Purpose                                                                       |
+| -------- | ----------------------------------------------------------------------------- |
+| **PORT** | Digital I/O with 4 bit (Pin0–Pin3) and Configuration of the other interfaces, |
+|          | always with taskit Port-8 protocol                                            |
+| **I²C**  | I²C master, read/write via tunneled byte streams                              |
+| **UART** | Serial interface, configurable (baud rate, parity, …)                         |
+| **SPI**  | SPI interface (configuration TBD)                                             |
+| **ADC**. | ADC interface (configuration TBD)                                             |
 
 The four **ADC channels ADC0 – ADC3** are located **exclusively on IO-Jack 0**. The remaining jacks (1–3) have no ADC.
 
