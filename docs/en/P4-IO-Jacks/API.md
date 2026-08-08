@@ -12,7 +12,7 @@ status: reference
 
 > Interactive reference for the HTTP REST API of the P4-IO-Jacks module (ESP32-P4) — network, MQTT, and IO jack configuration.
 
-<swagger-ui src="openapi.yaml"/>
+<swagger-ui src="gpio.net.api.yaml"/>
 
 ---
 

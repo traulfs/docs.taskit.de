@@ -19,12 +19,12 @@ In **UART mode**, an IO jack operates as a serial interface with two subtopics:
 
 | Subtopic | Purpose |
 |---|---|
-| **`cfg`** | Set UART settings |
+| **`port`** | Set UART settings over  |
 | **`uart`** | Send / receive raw UART data bytes |
 
 ---
 
-## Configuration (`cfg`)
+## Configuration (`port`)
 
 The interface is configured with five parameters before data transfer. Short form: `Baudrate-Databits-Parity-Stopbits` (N = none, E = even, O = odd):
 
@@ -127,7 +127,7 @@ The configuration is transmitted via `cfg` with the **Config UART** command (cod
 `Config UART` is transmitted with **code 25** in the **16-bit frame**. This frame is **4 bytes** long, even though the command code (6 bit) and config word (16 bit) together amount to only 22 bits of payload — the rest are fixed **marker bits** that make the frame self-synchronizing: every byte starts with either `1110` (lead byte, once) or `10` (continuation byte, 3×).
 
 ```
-Byte 0:  1 1 1 0 │ C5 C4 C3 C2
+Byte 0:  1 1 1 0  │ C5 C4 C3 C2
 Byte 1:  1 0      │ C1 C0 D15 D14 D13 D12
 Byte 2:  1 0      │ D11 D10 D9 D8 D7 D6
 Byte 3:  1 0      │ D5 D4 D3 D2 D1 D0
@@ -143,7 +143,7 @@ Instead of bit by bit, each byte can be computed directly from `Code` and `Word`
 ```
 Byte0 = 0xE0 | (Code >> 2)                    // Lead byte:      1110 + upper 4 bits of the code
 Byte1 = 0x80 | ((Code & 0x03) << 4)           // Continuation 1: lower 2 bits of the code
-              | (Word >> 12)                  //               + upper 4 bits of the data (15–12)
+             | (Word >> 12)                  //               + upper 4 bits of the data (15–12)
 Byte2 = 0x80 | ((Word >> 6) & 0x3F)           // Continuation 2: middle 6 bits of the data (11–6)
 Byte3 = 0x80 | (Word & 0x3F)                  // Continuation 3: lower 6 bits of the data (5–0)
 ```

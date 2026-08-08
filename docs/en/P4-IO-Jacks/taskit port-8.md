@@ -146,25 +146,25 @@ Byte 3:
 | **27** | ADC  Config Read  | – | TBD | 16-bit only |
 | **28** | DAC  Config Write | – | TBD | 16-bit only |
 | **29** | DAC  Config Read  | – | TBD | 16-bit only |
-| **30** | — reserved — | – | | 16-bit only |
-| **31** | — reserved — | – | | 16-bit only |
-| **32** | Reset Hardware  | – |                    | 16-bit only |
-| **33** | Read HW Version | – | for example "3.01" | 2 x 16-bit |
-| **34** | Read SW Version | – | for example "3.01" | 2 x 16-bit |
-| **35** | Read MAC  | - |  | 3 x 16-bit |
-| **36** | Read Name | - |  | n x 16-bit |
-| **37** | — reserved — | – | | 16-bit only |
-| **38** | — reserved — | – | | 16-bit only |
-| **39** | — reserved — | – | | 16-bit only |
-| **40** | — reserved — | – | | 16-bit only |
-| **41** | — reserved — | – | | 16-bit only |
-| **42** | — reserved — | – | | 16-bit only |
-| **43** | — reserved — | – | | 16-bit only |
-| **44** | — reserved — | – | | 16-bit only |
-| **45** | — reserved — | – | | 16-bit only |
-| **46** | — reserved — | – | | 16-bit only |
-| **47** | — reserved — | – | | 16-bit only |
-| **48** | — reserved — | – | | 16-bit only |
+| **30** | — reserved —      | – | | 16-bit only |
+| **31** | — reserved —      | – | | 16-bit only |
+| **32** | Reset Hardware    | – |                    | 16-bit only |
+| **33** | Read HW Version   | – | for example "3.01" | 2 x 16-bit |
+| **34** | Read SW Version   | – | for example "3.01" | 2 x 16-bit |
+| **35** | Read MAC          | - |  | 3 x 16-bit |
+| **36** | Read Name         | - |  | n x 16-bit |
+| **37** | — reserved —      | – | | 16-bit only |
+| **38** | — reserved —      | – | | 16-bit only |
+| **39** | — reserved —      | – | | 16-bit only |
+| **40** | — reserved —      | – | | 16-bit only |
+| **41** | — reserved —      | – | | 16-bit only |
+| **42** | — reserved —      | – | | 16-bit only |
+| **43** | — reserved —      | – | | 16-bit only |
+| **44** | — reserved —      | – | | 16-bit only |
+| **45** | — reserved —      | – | | 16-bit only |
+| **46** | — reserved —      | – | | 16-bit only |
+| **47** | — reserved —      | – | | 16-bit only |
+| **48** | — reserved —      | – | | 16-bit only |
 | **49** | — reserved — | – | | 16-bit only |
 | **50** | — reserved — | – | | 16-bit only |
 | **51** | — reserved — | – | | 16-bit only |
