@@ -237,4 +237,4 @@ CRC:            XX XX XX
 - [Bluetooth Core Specification 5.4](https://www.bluetooth.com/specifications/specs/core-specification-5-4/)
 - [Bluetooth SIG Assigned Numbers – Company Identifiers](https://www.bluetooth.com/specifications/assigned-numbers/)
 - [Eddystone Protocol Specification (GitHub)](https://github.com/google/eddystone)
-- Related: [[Measure2Go]] | [[projekte/taskit.de]]
+- Related: [[Measure2Go]]

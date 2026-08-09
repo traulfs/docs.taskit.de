@@ -71,8 +71,6 @@ The system provides a complete infrastructure for hundreds of wirelessly connect
 ## Related Notes
 
 - [[TSB]] – Tiny Serial Bus: Go library & protocol reference
-- [[TSB - Architektur (Mermaid)]] – Architecture diagram (Mermaid) + redesign concept
-- [[TSB - Architektur.excalidraw]] – Visual architecture overview
 - [[SenML Units]] – Unit encoding for sensor payloads
 - [[IEEE 754 Float 32-Bit]] – Floating-point format for measured values
 - [[taskit port-8]] – 8-port hardware platform

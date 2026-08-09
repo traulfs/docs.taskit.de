@@ -16,7 +16,7 @@ status: reference
 Specification of the manufacturer-specific BLE broadcast packet for taskit products (BLE sensor & beacon).
 
 - Based on: [[BLE/BLE Advertisement Format]]
-- Source: [[BLE/BcastPacket-Tabelle 1.csv]]
+- Source: `BLE/BcastPacket-Tabelle 1.csv`
 - **taskit Company Identifier:** `0x017B` (little endian → `0x7B 0x01`)
 
 ---
@@ -234,6 +234,5 @@ Advertising Data (31 bytes):
 ## Related Documents
 
 - [[BLE/BLE Advertisement Format]] – General BLE advertising protocol
-- [[BLE/BcastPacket-Tabelle 1.csv]] – Original source (taskit broadcast packet format)
 - [[Measure2Go]] – Product description
 - [[BEACON-LINE Advertisement in CSV Format]] – Anchor beacon system

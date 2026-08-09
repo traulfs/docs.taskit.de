@@ -178,7 +178,7 @@ The taskit gpio.net protocol uses a UTF-8-inspired encoding for port commands:
 
 → `C` = command/event bit · `D` = data bit · structure analogous to UTF-8 lead bytes
 
-See also: [[Powerpoint/portchar_260514]]
+See also: `portchar_260514.key`
 
 ---
 

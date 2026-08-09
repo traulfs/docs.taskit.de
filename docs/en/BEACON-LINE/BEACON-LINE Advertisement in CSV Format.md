@@ -14,7 +14,7 @@ status: reference
 
 # BeaconLine Advertisement in CSV Format
 
-BLE advertisements observed by the [[BeaconLine Scanning|Bline anchor]] (see [[BeaconLine Scanning 2026-05-22 13.33.13.excalidraw]]) are output as **one line per reception** over TCP port 4000 / MQTT / NATS / REST. The line is a flat comma-separated list with a fixed field order — one of the fields contains the complete raw BLE data as a hex string, decoded according to [[BLE/taskit BLE Manufacturer Advertisement]].
+BLE advertisements observed by the Bline anchor are output as **one line per reception** over TCP port 4000 / MQTT / NATS / REST. The line is a flat comma-separated list with a fixed field order — one of the fields contains the complete raw BLE data as a hex string, decoded according to [[BLE/taskit BLE Manufacturer Advertisement]].
 
 ---
 
@@ -122,7 +122,5 @@ def parse_line(line: str) -> dict:
 
 - [[BEACON-LINE Advertisement in JSON Format]] — Alternative representation of the same fields as JSON/NDJSON
 - [[BLE/taskit BLE Manufacturer Advertisement]] — Complete frame specification
-- [[BLE/BcastPacket-Tabelle 1.csv]] — Original table
-- [[BeaconLine Scanning 2026-05-22 13.33.13.excalidraw]] — Data path anchor → server → app
 - [[SenML Units]] — Meaning of the unit IDs
 - [[API]] — BeaconLine Server HTTP REST API

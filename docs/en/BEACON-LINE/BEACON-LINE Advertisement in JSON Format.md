@@ -14,7 +14,7 @@ status: reference
 
 # BeaconLine Advertisement in JSON Format
 
-Alternative representation to [[BEACON-LINE Advertisement in CSV Format]]: BLE advertisements observed by the [[BeaconLine Scanning|Bline anchor]] (see [[BeaconLine Scanning 2026-05-22 13.33.13.excalidraw]]) are output as **one JSON object per reception** — **NDJSON / JSON Lines** (one complete JSON object per line, separated by `\n`), not as one large JSON array. Same fields as in the CSV format, but with **native JSON types** instead of a flat comma list. One of the fields still contains the complete raw BLE data as a hex string, decoded according to [[BLE/taskit BLE Manufacturer Advertisement]].
+Alternative representation to [[BEACON-LINE Advertisement in CSV Format]]: BLE advertisements observed by the Bline anchor are output as **one JSON object per reception** — **NDJSON / JSON Lines** (one complete JSON object per line, separated by `\n`), not as one large JSON array. Same fields as in the CSV format, but with **native JSON types** instead of a flat comma list. One of the fields still contains the complete raw BLE data as a hex string, decoded according to [[BLE/taskit BLE Manufacturer Advertisement]].
 
 ---
 
@@ -140,6 +140,4 @@ No manual split handling needed — `json.loads` handles type conversion (number
 
 - [[BEACON-LINE Advertisement in CSV Format]] — original/reference format
 - [[BLE/taskit BLE Manufacturer Advertisement]] — complete frame specification
-- [[BLE/BcastPacket-Tabelle 1.csv]] — original table
-- [[BeaconLine Scanning 2026-05-22 13.33.13.excalidraw]] — data path anchor → server → app
 - [[SenML Units]] — meaning of the unit IDs

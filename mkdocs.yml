@@ -52,10 +52,10 @@ plugins:
         - locale: de
           name: Deutsch
           build: true
-          default: true
         - locale: en
           name: English
           build: true
+          default: true
   - search:
       lang:
         - de

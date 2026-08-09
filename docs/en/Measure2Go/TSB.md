@@ -12,13 +12,12 @@ Go:     >= 1.20
 ## Table of Contents
 
 1. [Protocol Architecture](#protocol-architecture)
-2. [Server – Connection Setup](#server--connection-setup)
+2. [Server – Connection Setup](#server-connection-setup)
 3. [I2C](#i2c)
 4. [UART](#uart)
 5. [GPIO Port](#gpio-port)
 6. [Modbus](#modbus)
 7. [Core API (tsb.go)](#core-api-tsbgo)
-8. [Constants](#constants)
 
 ---
 
