@@ -151,9 +151,9 @@ Byte 3:
 | **32** | Reset Hardware    | – |                    | 16-bit only |
 | **33** | Read HW Version   | – | for example "3.01" | 2 x 16-bit |
 | **34** | Read SW Version   | – | for example "3.01" | 2 x 16-bit |
-| **35** | Read MAC          | - |  | 3 x 16-bit |
-| **36** | Read Name         | - |  | n x 16-bit |
-| **37** | — reserved —      | – | | 16-bit only |
+| **35** | Read MAC          | - | | 3 x 16-bit |
+| **36** | Write Name        | Index of Name | | n x 16-bit |
+| **37** | Read  Name        | Index of Name | | n x 16-bit |
 | **38** | — reserved —      | – | | 16-bit only |
 | **39** | — reserved —      | – | | 16-bit only |
 | **40** | — reserved —      | – | | 16-bit only |
@@ -180,6 +180,51 @@ Byte 3:
 | **61** | — reserved — | – | | 16-bit only |
 | **62** | — reserved — | – | | 16-bit only |
 | **63** | — reserved — | – | | 16-bit only |
+
+
+Indexes of Names
+   - 00 reserved
+   - 01 Type of Hardware for example P4-IO-Jacks
+   - 02 Hardware name (user defined)
+   - 03-0F reserved
+
+   - 10 Jack0 name (user defined)
+   - 11 Jack0 connected HW
+   - 12 Jack0 taskit HW Nr
+   - 13-17 reserved
+   - 18 Jack0-Pin0 name (user defined)
+   - 19 Jack0-Pin1 name (user defined)
+   - 1A Jack0-Pin2 name (user defined)
+   - 1B Jack0-Pin3 name (user defined)
+   - 1C-1F reserved
+
+   - 20 Jack1 name (user defined)
+   - 21 Jack1 connected HW
+   - 22-27 reserved
+   - 28 Jack1-Pin0 name (user defined)
+   - 29 Jack1-Pin1 name (user defined)
+   - 2A Jack1-Pin2 name (user defined)
+   - 2B Jack1-Pin3 name (user defined)
+   - 2C-2F reserved
+
+   - 30 Jack2 name (user defined)
+   - 31 Jack2 connected HW
+   - 32-37 reserved
+   - 38 Jack2-Pin0 name (user defined)
+   - 39 Jack2-Pin1 name (user defined)
+   - 3A Jack2-Pin2 name (user defined)
+   - 3B Jack2-Pin3 name (user defined)
+   - 3C-1F reserved
+
+   - 40 Jack3 name (user defined)
+   - 41 Jack3 connected HW
+   - 42-47 reserved
+   - 48 Jack3-Pin0 name (user defined)
+   - 49 Jack3-Pin1 name (user defined)
+   - 4A Jack3-Pin2 name (user defined)
+   - 4B Jack3-Pin3 name (user defined)
+   - 4C-4F reserved
+
 
 - **PAD Mask**: bitfield, each set bit addresses one PAD (width = data width of the frame: 4 / 8 / 16 bit).
 - Codes **0–7** fit in 3 bits and are therefore usable in **all three** frame sizes.
