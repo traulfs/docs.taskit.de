@@ -226,6 +226,13 @@ Indexes of Names
    - 4C-4F reserved
 
 
+### 3.1 Default Names & UI Behavior
+
+- Names (Hardware, Jack, Pin) are **pre-populated with sensible defaults** (e.g. `Jack0`, `Jack0-Pin0`) rather than left empty — `Write Name` (36) only needs to be used to override a default.
+- Names are **shown directly in the jack view** of the configuration UI, next to the corresponding jack/pin — no separate page needed to see them.
+- Names are **editable in place** within the jack view (inline edit via `Write Name` (36) / `Read Name` (37)), not via a separate settings screen.
+- The **burger menu** contains only **Import** and **Export** — naming and other jack settings live in the jack view itself.
+
 - **PAD Mask**: bitfield, each set bit addresses one PAD (width = data width of the frame: 4 / 8 / 16 bit).
 - Codes **0–7** fit in 3 bits and are therefore usable in **all three** frame sizes.
 - Codes **8–63** require more than 3 command bits and are therefore **only available in the 16-bit frame** (6 command bits, codes 0–63). Codes **16–63** are currently **reserved/unassigned**.

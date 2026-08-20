@@ -1,0 +1,39 @@
+name,nut/card,typ,article number,link
+AS6212,nut,temperature sensor,547995,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-as6212
+BME280,nut,pressure / temperature sensor,547339,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nut-bme280
+BME680,nut,gas / environmental sensor,547992,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-bme680
+BMA456,nut,accelerometer,548002,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-bma456
+BME688,nut,gas / environmental sensor,548034,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-bme688
+BMM150,nut,magnetometer,548023,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-bmm150
+BMP390,nut,barometric pressure sensor,548024,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-bmp390
+BMX160,nut,9-axis IMU (accelerometer/gyroscope/magnetometer),548049,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-bmx160
+BNO055,nut,9-axis IMU (accelerometer/gyroscope/magnetometer),547340,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nut-bno055
+DPS368,nut,barometric pressure sensor,548042,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-dps368
+ENS160,nut,air quality sensor,548036,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-ens160
+MMC5603,nut,magnetometer,548035,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-mmc5603
+MS5607,nut,barometric pressure sensor,548022,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-ms5607
+OPT3002,nut,ambient light sensor,547997,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-opt3002
+RS232female,nut,RS-232 serial interface,548055,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-rs232-buchse
+RS232male ,nut,RS-232 serial interface,548055,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-rs232-stecker
+RS485,nut,RS-485 serial interface,548062,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-rs485
+TCS3400,nut,color sensor,547993,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-tcs3400
+TMAG5273,nut,3D hall-effect sensor,547996,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-tmag5273
+TMP75,nut,temperature sensor,548021,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-tmp75
+TSL2591,nut,ambient light sensor,547994,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-tsl2591
+VL53L0X,nut,time-of-flight distance sensor,547998,https://taskit.de/produkte/iot-gpio-loesungen/sensor-aktor-nuts/?p=io-nuts-vl53l0x
+AI4,card,4 channel analog input,548350,
+AO,card,analog output,547366,
+AD/DA,card,analog input/output,547555,
+CAN,card,CAN bus interface,547431,
+DI24V,card,4 channel digital input 24V,548357,
+DI-5V,card,4 channel digital input 5V,548202,
+DO-5V,card,4 channel digital output 5V,548356,
+RS232,card,RS-232 serial interface,547388,
+RS485,card,RS-485 full dublex serial interface,548100,
+BLE280,card,Bluetooth Low Energy (with BME280 sensor),547197,
+BLE,card,Bluetooth Low Energy,,
+DIO,card,digital input/output,547198,
+DI-5V,card,digital input 5V,548202,
+DO-SSR,card,4 digital output solid state relay,547397,
+Relais1,card,2 relay output,547382,
+RTD-DMS,card,RTD temperature input,547394,
