@@ -12,7 +12,7 @@ Technical documentation of [taskit GmbH](https://www.taskit.de) (Berlin) coverin
 
 Wireless sensor network system that converts wired sensors into 2.4 GHz radio devices — with gateways, edge devices (Raspberry Pi CM4), and cloud connectivity.
 
-→ [Product & System Overview](Measure2Go/Measure2Go.md) · [Taskit Sensor Bus (TSB)](Measure2Go/TSB.md) · [taskit port-8](P4-IO-Jacks/taskit port-8.md)
+→ [Product & System Overview](Measure2Go/Measure2Go.md) · [Taskit Sensor Bus (TSB)](Measure2Go/TSB.md) · [taskit port-8](gpio.net/taskit port-8.md)
 
 ### BLE
 
@@ -26,8 +26,8 @@ BLE scanning system with BlineServer — advertisement output in JSON and CSV fo
 
 → [JSON Format](BEACON-LINE/BEACON-LINE Advertisement in JSON Format.md) · [CSV Format](BEACON-LINE/BEACON-LINE Advertisement in CSV Format.md)
 
-### P4-IO-Jacks
+### gpio.net
 
 The four IO jacks of the P4 module and their operating modes (PORT, I²C, UART, SPI).
 
-→ [Interfaces Overview](P4-IO-Jacks/P4-IO-Jacks Interfaces.md) · [MQTT & NATS](P4-IO-Jacks/MQTT & NATS.md)
+→ [Interfaces Overview](gpio.net/P4-IO-Jacks Interfaces.md) · [MQTT & NATS](gpio.net/MQTT & NATS.md)

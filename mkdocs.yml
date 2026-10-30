@@ -28,7 +28,6 @@ theme:
         icon: material/weather-sunny
         name: Helles Design
   features:
-    - navigation.instant
     - navigation.tracking
     - navigation.top
     - navigation.indexes
