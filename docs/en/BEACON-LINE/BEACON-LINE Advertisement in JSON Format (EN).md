@@ -1,3 +1,7 @@
+---
+description: "Draft interface: proposed BeaconLine MQTT JSON output for flespi, one JSON object per BLE advertisement observation, with ident and timestamp fields."
+---
+
 # Proposed BeaconLine MQTT JSON Interface for flespi
 
 **Document revision:** 1.1  

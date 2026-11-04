@@ -1,3 +1,7 @@
+---
+description: "BLE advertising format of the MOKOSmart S03D door sensor: ADV_IND with door state in device status bit 3, battery and timestamp, plus scan response."
+---
+
 # MOKOSmart S03D Door Sensor — BLE Advertising Data Format
 
 ## Scope

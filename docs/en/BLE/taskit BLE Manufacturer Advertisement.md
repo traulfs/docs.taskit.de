@@ -9,6 +9,7 @@ erstellt: 2026-05-10
 aktualisiert: 2026-05-18
 quelle: BLE/BcastPacket-Tabelle 1.csv
 status: reference
+description: "Specification of the taskit manufacturer-specific BLE advertisement (company ID 0x017B) for BLE sensors and beacons: packet layout and frame types."
 ---
 
 # taskit BLE Manufacturer Advertisement Format

@@ -6,6 +6,7 @@ tags:
   - openapi
 erstellt: 2026-08-03
 status: reference
+description: "Interactive OpenAPI reference for the HTTP REST API of the P4-IO-Jacks module (ESP32-P4): network, MQTT and IO jack configuration endpoints."
 ---
 
 # P4-IO-Jacks — HTTP REST API

@@ -1,3 +1,7 @@
+---
+description: "BLE advertising format of the RuuviTag environmental sensor: Data Format 5 (RAWv2) with temperature, humidity, pressure, acceleration and battery."
+---
+
 # Ruuvi RuuviTag — BLE Advertising Data Format
 
 ## Scope

@@ -6,6 +6,7 @@ tags:
   - i2c-mode
 erstellt: 2026-06-17
 status: description
+description: "IO jack in I²C mode: the jack acts as I²C master; one command byte (R/W bit plus 7-bit length) selects read, write or I²C address operations."
 ---
 
 # IO-Jack — I²C Read & Write

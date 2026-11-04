@@ -1,3 +1,7 @@
+---
+description: "BLE advertising format of the MOKOSmart H4-P5202DH2 / H4 Pro temperature and humidity sensor: MOKO T&H frame, service UUID 0xABFE, frame type 0x70."
+---
+
 # MOKOSmart H4-P5202DH2 / H4 Pro — BLE Advertising Data Format
 
 ## Scope

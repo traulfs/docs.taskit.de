@@ -7,6 +7,7 @@ tags:
 quelle: io-nuts_carts.csv
 erstellt: 2026-08-20
 status: reference
+description: "Overview of IO-Nuts sensor and interface modules and IO-Cards for the P4-IO-Jacks system, with sensor type, article number and product page link."
 ---
 
 # IO-Nuts & Cards — Overview

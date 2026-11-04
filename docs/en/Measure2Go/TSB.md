@@ -1,3 +1,7 @@
+---
+description: "TSB (Tiny Serial Bus): Go library and protocol for embedded systems over UART or TCP, with COBS framing, CRC-16 and I2C, UART, GPIO and Modbus access."
+---
+
 # TSB – Tiny Serial Bus
 
 TSB is a Go library for communicating with embedded systems over serial connections (UART/serial port) or TCP networks. It provides a unified protocol framework for addressing hardware interfaces such as I2C, UART, SPI, and GPIO ports.

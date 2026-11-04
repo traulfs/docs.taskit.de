@@ -5,6 +5,7 @@ tags:
   - port-mode
 erstellt: 2026-06-17
 status: description
+description: "IO jack in PORT mode: 4-bit digital I/O on Pin0–Pin3 using single-byte Port-8 commands for write, read, set, clear and toggle bits, with return codes."
 ---
 
 # IO-Jack — PORT Mode

@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: "Technical documentation by taskit GmbH (Berlin) on Measure2Go sensor networks, BLE advertisement formats, BEACON-LINE and gpio.net IO modules."
 ---
 
 # taskit Documentation

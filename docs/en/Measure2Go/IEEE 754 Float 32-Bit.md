@@ -5,6 +5,7 @@ tags:
   - technology
   - embedded
 erstellt: 2026-05-10
+description: "IEEE 754 single-precision (32-bit) float: sign, exponent and mantissa layout, value calculation, special values, range and precision, with examples."
 ---
 
 # IEEE 754 – 32-Bit Float (Single Precision)
