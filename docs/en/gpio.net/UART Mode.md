@@ -5,6 +5,7 @@ tags:
   - uart-mode
 erstellt: 2026-06-17
 status: description
+description: "IO jack in UART mode: configure baud rate (300 bit/s to 5 Mbit/s), data bits, parity, stop bits and RS485, then send and receive raw UART bytes."
 ---
 
 # IO-Jack — UART Mode

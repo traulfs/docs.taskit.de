@@ -8,6 +8,7 @@ tags:
 quelle: portchar_260514.key
 erstellt: 2026-05-18
 status: reference
+description: "taskit Port-8: self-synchronizing command and data encoding of the gpio.net modules, modeled on UTF-8, with 4-, 8- and 16-bit frames over TSB or UART."
 ---
 
 # taskit Port-8 – Protocol Description

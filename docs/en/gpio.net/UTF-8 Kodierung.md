@@ -7,6 +7,7 @@ tags:
   - reference
 erstellt: 2026-05-14
 status: reference
+description: "How UTF-8 encodes Unicode code points in 1 to 4 bytes: byte patterns per code point range, ASCII compatibility and step-by-step encoding examples."
 ---
 
 # UTF-8 Encoding

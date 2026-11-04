@@ -1,3 +1,7 @@
+---
+description: "BLE advertising format of the MOKOSmart S02R ToF ranging sensor beacon: manufacturer-specific data with distance in mm, battery voltage and MAC suffix."
+---
+
 # MOKOSmart S02R ToF Sensor Beacon — BLE Advertising Data Format
 
 ## Scope

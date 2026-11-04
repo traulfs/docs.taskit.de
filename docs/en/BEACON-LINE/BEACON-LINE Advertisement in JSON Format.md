@@ -10,6 +10,7 @@ erstellt: 2026-07-15
 aktualisiert: 2026-07-15
 quelle: BLE/BcastPacket-Tabelle 1.csv
 status: reference
+description: "BeaconLine JSON format: BLE advertisements from a Bline anchor as NDJSON, one object per reception with native JSON types; field mapping to the CSV format."
 ---
 
 # BeaconLine Advertisement in JSON Format

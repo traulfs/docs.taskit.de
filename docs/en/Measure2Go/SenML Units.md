@@ -8,6 +8,7 @@ tags:
 erstellt: 2026-05-20
 quelle: RFC 8428, IANA SenML Unit Registry
 status: reference
+description: "Reference of SenML unit symbols (RFC 8428, IANA SenML Unit Registry) for the u field of sensor values: SI base and derived units, flow, optics and more."
 ---
 
 # SenML Units

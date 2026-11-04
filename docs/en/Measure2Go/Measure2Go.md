@@ -6,6 +6,7 @@ tags:
   - sensor
 quelle: https://www.taskit.de/en/products/sensor-networks/measure2go/
 erstellt: 2026-04-30
+description: "Measure2Go by taskit: wireless sensor network that turns wired sensors into 2.4 GHz radio devices, with gateways, Raspberry Pi CM4 edge devices and cloud."
 ---
 
 # Measure2Go

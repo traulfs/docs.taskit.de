@@ -9,6 +9,7 @@ tags:
 erstellt: 2026-06-17
 status: description
 quelle_port8: "[[taskit port-8]]"
+description: "Addressing the P4-IO-Jacks via MQTT topics and NATS subjects (module, jack, interface, direction) and the byte stream content of each interface."
 ---
 
 # P4-IO-Jacks — Transport via MQTT & NATS

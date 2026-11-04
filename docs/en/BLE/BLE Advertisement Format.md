@@ -6,6 +6,7 @@ tags:
   - beaconline
   - technology
 erstellt: 2026-05-10
+description: "How BLE advertising packets are built: physical-layer fields, PDU header and types, AD structures, manufacturer data and known beacon formats."
 ---
 
 # BLE Advertisement Format

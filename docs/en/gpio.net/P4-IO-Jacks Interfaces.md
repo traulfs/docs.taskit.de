@@ -5,6 +5,7 @@ tags:
   - reference
 erstellt: 2026-06-17
 status: description
+description: "Overview of the four IO jacks of the P4 module and their operating modes PORT, I²C, UART, SPI and ADC, with jack/mode matrix and addressing."
 ---
 
 # P4-IO-Jacks — Interfaces (Overview)
