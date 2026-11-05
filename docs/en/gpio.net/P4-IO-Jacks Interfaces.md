@@ -62,5 +62,5 @@ The four ADC channels (on IO-Jack 0) are addressed via the Ext-3 commands:
 
 - Modes: [[PORT Mode]] · [[UART Mode]] · [[I2C Read & Write]]
 - Transport: [[MQTT & NATS]]
-- Configuration via HTTP: [[API]]
+- Configuration via HTTP: [[gpio.net/API.md|API]]
 - Available sensors/cards: [[IO-Nuts & Cards]]

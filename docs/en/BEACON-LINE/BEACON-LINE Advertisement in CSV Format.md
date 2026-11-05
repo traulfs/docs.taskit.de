@@ -124,4 +124,4 @@ def parse_line(line: str) -> dict:
 - [[BEACON-LINE Advertisement in JSON Format]] — Alternative representation of the same fields as JSON/NDJSON
 - [[BLE/taskit BLE Manufacturer Advertisement]] — Complete frame specification
 - [[SenML Units]] — Meaning of the unit IDs
-- [[API]] — BeaconLine Server HTTP REST API
+- [[BEACON-LINE/API|API]] — BeaconLine Server HTTP REST API
