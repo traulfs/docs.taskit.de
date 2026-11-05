@@ -65,6 +65,7 @@ plugins:
 
 hooks:
   - hooks/roamlinks_i18n.py
+  - hooks/i18n_exclude.py
 
 markdown_extensions:
   - admonition
