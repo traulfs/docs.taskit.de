@@ -12,7 +12,8 @@ This hook reimplements the same [[filename#title|alias|WxH]] syntax but
 scopes the filename search to the current page's own locale folder
 (derived from the first path segment of page.file.src_path), falling
 back to the full docs_dir for paths outside any locale folder (shared
-assets, non-localized files).
+assets, non-localized files). Pages of a non-default locale (de) fall
+back to the default locale folder (en) for targets not translated yet.
 """
 
 import os
@@ -25,6 +26,7 @@ log = get_plugin_logger(__name__)
 ROAMLINK_RE = r"""\[\[(.*?)(\#.*?)?(?:\|([\D][^\|\]]+[\d]*))?(?:\|(\d+)(?:x(\d+))?)?\]\]"""
 
 KNOWN_LOCALES = {"de", "en"}
+DEFAULT_LOCALE = "en"
 
 
 def simplify(filename):
@@ -46,9 +48,15 @@ class RoamLinkReplacer:
         self.page_url = page_url
 
         # Scope the search to the current page's own locale subtree, if any.
+        # Pages of a non-default locale fall back to the default locale's
+        # subtree when the target is not translated yet - the same fallback
+        # mkdocs-static-i18n applies to pages (fallback_to_default).
         first_segment = page_url.split("/", 1)[0]
+        self.fallback_root = None
         if first_segment in KNOWN_LOCALES:
             self.search_root = os.path.join(base_docs_url, first_segment)
+            if first_segment != DEFAULT_LOCALE:
+                self.fallback_root = os.path.join(base_docs_url, DEFAULT_LOCALE)
         else:
             self.search_root = base_docs_url
 
@@ -79,15 +87,18 @@ class RoamLinkReplacer:
                     if title:
                         rel_link_url = rel_link_url + "#" + format_title
             else:
-                for root, _dirs, files in os.walk(self.search_root):
-                    for name in files:
-                        if simplify(name) == simplify(filename):
-                            abs_link_url = os.path.dirname(os.path.join(root, name))
-                            rel_link_url = os.path.join(
-                                os.path.relpath(abs_link_url, abs_linker_url), name
-                            )
-                            if title:
-                                rel_link_url = rel_link_url + "#" + format_title
+                for search_root in filter(None, (self.search_root, self.fallback_root)):
+                    for root, _dirs, files in os.walk(search_root):
+                        for name in files:
+                            if simplify(name) == simplify(filename):
+                                abs_link_url = os.path.dirname(os.path.join(root, name))
+                                rel_link_url = os.path.join(
+                                    os.path.relpath(abs_link_url, abs_linker_url), name
+                                )
+                                if title:
+                                    rel_link_url = rel_link_url + "#" + format_title
+                    if rel_link_url:
+                        break
             if rel_link_url == "":
                 log.warning(f"roamlinks_i18n unable to find {filename} in {self.search_root}")
                 return whole_link
