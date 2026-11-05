@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{#- hreflang x-default -> English version (x_default_url is set in hooks/i18n_extras.py) -#}
+{% block extrahead %}
+  {{ super() }}
+  {%- if x_default_url %}
+  <link rel="alternate" href="{{ x_default_url }}" hreflang="x-default">
+  {%- endif %}
+{% endblock %}
