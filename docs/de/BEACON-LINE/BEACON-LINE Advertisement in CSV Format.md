@@ -10,7 +10,7 @@ erstellt: 2026-05-24
 aktualisiert: 2026-05-24
 quelle: BLE/BcastPacket-Tabelle 1.csv
 status: reference
-description: "CSV-Ausgabe von BeaconLine: eine Zeile pro BLE-Advertisement, das ein Bline-Anchor empfängt, über TCP-Port 4000, MQTT, NATS oder REST; Feldreihenfolge und Beispiel."
+description: "CSV-Ausgabe von BeaconLine: eine Zeile pro BLE-Advertisement eines Bline-Anchors über TCP-Port 4000, MQTT, NATS oder REST, mit Feldern und Beispiel."
 ---
 
 # BeaconLine-Advertisement im CSV-Format
