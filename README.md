@@ -5,10 +5,11 @@ Technische Dokumentation der [taskit GmbH](https://www.taskit.de) (Berlin) zu Se
 ## Aufbau
 
 - [MkDocs](https://www.mkdocs.org) mit [Material-Theme](https://squidfunk.github.io/mkdocs-material/), Konfiguration in `mkdocs.yml`.
-- Inhalte in `docs/en/<Thema>/…md` (Themen: `Measure2Go`, `BLE`, `BEACON-LINE`, `gpio.net`), Startseite `docs/en/index.md`. Die Navigation entsteht automatisch aus den Ordnern.
+- Inhalte in `docs/en/<Thema>/…md` (Englisch, Standardsprache, unter `/`) und `docs/de/<Thema>/…md` (Deutsch, unter `/de/`). Themen: `Measure2Go`, `BLE`, `BEACON-LINE`, `gpio.net`; Startseiten `docs/en/index.md` und `docs/de/index.md`. Die Navigation entsteht automatisch aus den Ordnern.
 - `docs/assets/` (Logo, Favicon), `docs/stylesheets/extra.css`, `docs/robots.txt`.
 - Plugins: `mkdocs-static-i18n` (Ordnerstruktur pro Sprache), `search`, `swagger-ui-tag` (OpenAPI-YAMLs als Swagger UI).
 - `hooks/roamlinks_i18n.py` löst Obsidian-`[[Wikilinks]]` auf. Die Dokumente werden als [Obsidian](https://obsidian.md)-Vault gepflegt; `*.excalidraw.md` und `*.numbers` werden nicht veröffentlicht.
+- `hooks/i18n_extras.py`: Seiten pro Sprache ausschließen, Warnung bei fehlender deutscher Übersetzung, hreflang `x-default`. `overrides/main.html` gibt das `x-default`-Tag aus.
 
 ## Lokal bauen und ansehen
 
@@ -28,6 +29,25 @@ mkdocs build --strict
 ```
 
 Die Build-Ausgabe `site/` ist per `.gitignore` ausgeschlossen; `.venv/` bitte nicht committen.
+
+## Deutsche Übersetzung pflegen
+
+Die englischen Seiten in `docs/en/` sind die Quelle. Jede Seite hat ein deutsches Gegenstück in `docs/de/` mit **demselben Pfad und Dateinamen** (z. B. `docs/en/gpio.net/PORT Mode.md` → `docs/de/gpio.net/PORT Mode.md`). Nur so verknüpfen Sprachumschalter und hreflang die beiden Seiten.
+
+- **Jede Änderung an einer englischen Seite braucht die passende Änderung in der deutschen Seite** – auch Tabellen, Codes und Beispiele, damit beide Sprachen inhaltlich gleich bleiben.
+- **Neue Seite:** englische und deutsche Datei anlegen, beide mit eigener `description:` im Front Matter (120–155 Zeichen).
+- **Begriffe:** siehe `i18n/glossar-de.md` (Produktnamen, Feldnamen, Code und API-Pfade bleiben unverändert).
+- **Wikilinks** in deutschen Seiten mit deutschem Linktext schreiben: `[[PORT Mode|PORT-Modus]]`. Der Dateiname bleibt englisch.
+- **Dateien nur in `docs/en/`:** OpenAPI-YAMLs und `io-nuts_carts.csv`. Die deutschen API-Seiten verweisen mit `src="../../en/…"` darauf.
+- **Seite bewusst nicht übersetzen:** Pfad in `EXCLUDE` in `hooks/i18n_extras.py` eintragen; die Seite erscheint dann nicht unter `/de/` (derzeit: der Kundenentwurf „BEACON-LINE Advertisement in JSON Format (EN)“).
+
+Prüfen:
+
+```bash
+mkdocs build --strict
+```
+
+Fehlt zu einer englischen Seite die deutsche Datei, bricht der Strict-Build mit `No 'de' translation for en/…` ab. Der Deploy-Build läuft ohne `--strict` weiter und zeigt unter `/de/` dann die englische Seite. Geänderte Inhalte erkennt der Build nicht – dafür beim Review die englische und die deutsche Datei nebeneinander ansehen.
 
 ## Veröffentlichen
 

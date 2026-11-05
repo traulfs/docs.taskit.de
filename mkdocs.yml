@@ -1,12 +1,13 @@
-site_name: taskit Dokumentation
+site_name: taskit Documentation
 site_url: https://docs.taskit.de
-site_description: Technische Dokumentation der taskit GmbH zu Sensornetzwerken, BLE-Formaten und IO-Modulen
+site_description: Technical documentation by taskit GmbH on sensor networks, BLE formats and IO modules
 repo_url: https://github.com/traulfs/docs.taskit.de
 repo_name: traulfs/docs.taskit.de
 
 theme:
   name: material
-  language: de
+  custom_dir: overrides
+  language: en
   logo: assets/taskit-logo-wide.png
   favicon: assets/taskit-favicon.png
   font:
@@ -19,14 +20,14 @@ theme:
       accent: custom
       toggle:
         icon: material/weather-night
-        name: Dunkles Design
+        name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: black
       accent: custom
       toggle:
         icon: material/weather-sunny
-        name: Helles Design
+        name: Switch to light mode
   features:
     - navigation.tracking
     - navigation.top
@@ -51,6 +52,15 @@ plugins:
         - locale: de
           name: Deutsch
           build: true
+          # German site name, description and toggle labels for /de/
+          site_name: taskit Dokumentation
+          site_description: Technische Dokumentation der taskit GmbH zu Sensornetzwerken, BLE-Formaten und IO-Modulen
+          theme:
+            palette:
+              - toggle:
+                  name: Dunkles Design
+              - toggle:
+                  name: Helles Design
         - locale: en
           name: English
           build: true
@@ -65,6 +75,7 @@ plugins:
 
 hooks:
   - hooks/roamlinks_i18n.py
+  - hooks/i18n_extras.py
 
 markdown_extensions:
   - admonition
